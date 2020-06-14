@@ -8,5 +8,5 @@ export async function doLogin(
   email: string,
   password: string,
 ): Promise<brandResponse> {
-  return axios.post('http://e4g9k.mocklab.io/login');
+  return axios.post('https://e4g9k.mocklab.io/login');
 }
