@@ -1,0 +1,43 @@
+.left-enter {
+  transform: translateX(100%);
+  transition: all 600ms;
+}
+.left-enter.left-enter-active {
+  transform: translateX(0);
+  transition: all 600ms;
+}
+.left-exit {
+  transform: translateX(0);
+  transition: all 600ms;
+}
+.left-exit.left-exit-active {
+  transform: translateX(-100%);
+  transition: all 600ms;
+}
+
+.right-enter {
+  transform: translateX(-100%);
+}
+.right-enter.right-enter-active {
+  transform: translateX(0);
+  transition: all 600ms;
+}
+.right-exit {
+  transform: translateX(0);
+}
+.right-exit.right-exit-active {
+  transform: translateX(100%);
+  transition: all 600ms;
+}
+
+div.transition-group {
+  position: relative;
+}
+
+section.route-section {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
