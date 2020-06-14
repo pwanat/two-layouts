@@ -9,6 +9,7 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
+import { Brand } from '../../interfaces/Brand';
 
 // In real-world app I'd rather use formik+yup but just to simplify validate.js
 const schema = {
@@ -74,14 +75,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type Props = {
-  doLogin: (email: string, password: string) => void;
+  doLogin: (email: string, password: string, brandId: number) => void;
   isLoading: boolean;
-  loginError: string | Error | null;
-  username: string;
+  brand: Brand,
 };
 
 const LoginComponent = (props: Props) => {
-  const { doLogin, isLoading, loginError, username } = props;
+  const { doLogin, isLoading, brand } = props;
   const classes = useStyles();
 
   const [formState, setFormState] = useState({
@@ -129,7 +129,7 @@ const LoginComponent = (props: Props) => {
 
   const handleSignIn = event => {
     event.preventDefault();
-    doLogin(formState.values.email, formState.values.password);
+    doLogin(formState.values.email, formState.values.password, brand.id);
   };
 
   const hasError = field =>
@@ -196,15 +196,15 @@ const LoginComponent = (props: Props) => {
           </form>
           <div className={classes.result}>
             {
-              username &&
+              brand.username &&
               <Typography align="center" className={classes.successMessage}>
-                Login success - username: {username}
+                Login success - username: {brand.username}
               </Typography>
             }
             {
-              loginError &&
+              brand.loginError &&
               <Typography align="center" className={classes.errorMessage}>
-                Login error - {loginError}
+                Login error - {brand.loginError}
               </Typography>
             }
           </div>

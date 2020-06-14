@@ -1,11 +1,9 @@
 import * as actions from '../actionTypes/brandActionTypes';
 import { Brand } from '../interfaces/Brand';
 
-
 export interface BrandsState {
   activeBrandId: number,
   brands: Array<Brand>,
-  username: string,
 }
 
 const initialState: BrandsState = {
@@ -16,17 +14,21 @@ const initialState: BrandsState = {
       name: 'Brand A',
       route: '/',
       themeName: 'ThemeA',
-      switchDirection: 'left'
+      switchDirection: 'left',
+      username: '',
+      loginError: '',
     },
     {
       id: 2,
       name: 'Brand B',
       route: '/BrandB/',
       themeName: 'ThemeB',
-      switchDirection: 'right'
+      switchDirection: 'right',
+      username: '',
+      loginError: '',
     }
   ],
-  username: '',
+
 };
 
 export default function brandReducer(
@@ -39,15 +41,47 @@ export default function brandReducer(
         ...state,
         activeBrandId: action.brand.id
       };
-    case actions.LOGIN_REQUEST:
+    case actions.LOGIN:
       return {
         ...state,
-        username: ''
+        brands: state.brands.map((item, index) => {
+          if (item.id !== action.brandId) {
+            return item;
+          }
+          return {
+            ...item,
+            username: '',
+            loginError: '',
+          };
+        })
       };
     case actions.LOGIN_SUCCESS:
       return {
         ...state,
-        username: action.username
+        brands: state.brands.map((item, index) => {
+          if (item.id !== action.brandId) {
+            return item;
+          }
+          return {
+            ...item,
+            username: action.username,
+            loginError: '',
+          };
+        })
+      };
+    case actions.LOGIN_FAILURE:
+      return {
+        ...state,
+        brands: state.brands.map((item, index) => {
+          if (item.id !== action.brandId) {
+            return item;
+          }
+          return {
+            ...item,
+            username: '',
+            loginError: action.error,
+          };
+        })
       };
     default:
       return state;

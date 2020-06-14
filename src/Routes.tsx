@@ -6,15 +6,16 @@ import AppRoute from './AppRoute';
 import DefaultLayout from './layouts/DefaultLayoutContainer';
 import BrandComponent from './components/Brand/BrandComponent';
 import LoginContainer from './components/Login/LoginContainer';
-import { getThemeByName } from './helpers';
+import { getThemeByName, getActiveBrandById } from './helpers';
 import WithTransition from './components/WithTransition/WithTransition';
+
 
 const Routes = (props) => {
   const { brands, location } = props;
-  // In case brands have different routes this would need some additional login
+  // In case brands have different routes this would need some additional logic
 
   const isAnimated = location.query && location.query.isAnimated ? location.query.isAnimated : false;
-  const activeBrand = brands.brands.find(x => x.id === brands.activeBrandId);
+  const activeBrand = getActiveBrandById(brands.brands, brands.activeBrandId);
   return (
     <>
       <WithTransition

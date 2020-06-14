@@ -3,5 +3,7 @@ export interface Brand {
   name: string,
   themeName: string,
   route: string,
-  switchDirection: string
+  switchDirection: string,
+  username: string,
+  loginError: Error | string,
 }

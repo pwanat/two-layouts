@@ -10,7 +10,8 @@ export const LOGIN = 'brandActionTypes/LOGIN';
 export interface LoginAction {
   type: typeof LOGIN;
   email: string,
-  password: string
+  password: string,
+  brandId: number,
 }
 
 export const LOGIN_REQUEST = 'brandActionTypes/LOGIN_REQUEST';
@@ -22,12 +23,14 @@ export const LOGIN_SUCCESS = 'brandActionTypes/LOGIN_SUCCESS';
 export interface LoginSuccessAction {
   type: typeof LOGIN_SUCCESS;
   username: string;
+  brandId: number;
 }
 
 export const LOGIN_FAILURE = 'brandActionTypes/LOGIN_FAILURE';
 export interface LoginFailureAction {
   type: typeof LOGIN_FAILURE;
   error: Error | string;
+  brandId: number;
 }
 
 export type brandAction =

@@ -4,18 +4,20 @@ import { AppState } from '../../reducers/rootReducer';
 import { login } from '../../actionCreators/brandActionCreators';
 import * as actionTypes from '../../actionTypes/brandActionTypes';
 import LoginComponent from './LoginComponent';
+import { getActiveBrandById } from '../../helpers';
 
 const mapStateToProps = (state: AppState) => {
+  const activeBrand = getActiveBrandById(state.brands.brands, state.brands.activeBrandId);
   return {
     isLoading: state.isLoading.loader[actionTypes.LOGIN],
     loginError: state.error[actionTypes.LOGIN],
-    username: state.brands.username,
+    brand: activeBrand,
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<actionTypes.brandAction>) => ({
-  doLogin: (email: string, password: string) => {
-    dispatch(login(email, password));
+  doLogin: (email: string, password: string, brandId: number) => {
+    dispatch(login(email, password, brandId));
   },
 });
 

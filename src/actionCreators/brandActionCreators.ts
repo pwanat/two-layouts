@@ -12,12 +12,14 @@ export function setActiveBrand(
 
 export function login(
   email: string,
-  password: string
+  password: string,
+  brandId: number,
 ): actions.LoginAction {
   return {
     type: actions.LOGIN,
     email,
-    password
+    password,
+    brandId,
   };
 }
 
@@ -28,19 +30,23 @@ export function loginRequest(): actions.LoginRequestAction {
 }
 
 export function loginSuccess(
-  username: string
+  username: string,
+  brandId: number
 ): actions.LoginSuccessAction {
   return {
     type: actions.LOGIN_SUCCESS,
-    username
+    username,
+    brandId
   };
 }
 
 export function loginFailure(
-  error: Error | string
+  error: Error | string,
+  brandId: number,
 ): actions.LoginFailureAction {
   return {
     type: actions.LOGIN_FAILURE,
-    error
+    error,
+    brandId,
   };
 }
